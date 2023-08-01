@@ -51,8 +51,8 @@ export class InscriptionController {
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateInscriptionDto: UpdateInscriptionDto) {
   const ins = await this.inscriptionService.update(id, updateInscriptionDto);
-  if(updateInscriptionDto.active && updateInscriptionDto.active === true) {
-    await this.etudiantService.update(ins.etudiant._id, {formation: ins.formation._id})
+  if(updateInscriptionDto?.active === true) {
+    await this.etudiantService.update(ins.etudiant._id, {formation: updateInscriptionDto.formation})
   }
   return ins;
   }

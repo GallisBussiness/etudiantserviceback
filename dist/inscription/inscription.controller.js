@@ -49,8 +49,8 @@ let InscriptionController = class InscriptionController {
     }
     async update(id, updateInscriptionDto) {
         const ins = await this.inscriptionService.update(id, updateInscriptionDto);
-        if (updateInscriptionDto.active && updateInscriptionDto.active === true) {
-            await this.etudiantService.update(ins.etudiant._id, { formation: ins.formation._id });
+        if ((updateInscriptionDto === null || updateInscriptionDto === void 0 ? void 0 : updateInscriptionDto.active) === true) {
+            await this.etudiantService.update(ins.etudiant._id, { formation: updateInscriptionDto.formation });
         }
         return ins;
     }
